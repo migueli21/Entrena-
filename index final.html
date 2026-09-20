@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Entrena Your Life · Entrenamiento y hábitos</title>
+<meta name="description" content="Entrena Your Life: entrenamientos y hábitos para que entrenar sea parte de tu vida. Rellena el formulario y empezamos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F6F9F5;
+    --surface: #E3ECE1;
+    --text: #12251A;
+    --muted: #4A5F4F;
+    --line: #C3D4C1;
+    --forest: #1B5E20;
+    --leaf: #2E7D32;
+    --lime: #00C853;
+    --ink: #0A1F10;
+    --on-dark: #FFFFFF;
+    --on-dark-muted: #CFE6D1;
+    --hero-bg: #1B5E20;
+    --habit-off: #FFFFFF;
+    --habit-off-border: #B7C9B5;
+    --habit-on: #1B5E20;
+    --habit-on-text: #FFFFFF;
+    --font-display: "Barlow Condensed", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+    --font-body: "Barlow", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0D1A11;
+      --surface: #15261A;
+      --text: #E8F2E8;
+      --muted: #A5BBA8;
+      --line: #27402D;
+      --hero-bg: #12421A;
+      --habit-off: #0D1A11;
+      --habit-off-border: #3A5A41;
+      --habit-on: #00C853;
+      --habit-on-text: #06210F;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0D1A11;
+    --surface: #15261A;
+    --text: #E8F2E8;
+    --muted: #A5BBA8;
+    --line: #27402D;
+    --hero-bg: #12421A;
+    --habit-off: #0D1A11;
+    --habit-off-border: #3A5A41;
+    --habit-on: #00C853;
+    --habit-on-text: #06210F;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: var(--font-body); font-size: 1.125rem; line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--lime); outline-offset: 3px; }
+  .wrap { width: 100%; max-width: 1080px; margin: 0 auto; padding: 0 1.25rem; }
+
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 800; line-height: 0.95; text-transform: uppercase; margin: 0; }
+  h2 { font-size: clamp(2.6rem, 8vw, 4.6rem); }
+  h3 { font-size: clamp(1.9rem, 4.5vw, 2.5rem); }
+  p { margin: 0 0 1rem; }
+
+  /* Top */
+  .topbar { background: var(--hero-bg); color: var(--on-dark); }
+  .topbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-top: 0.9rem; padding-bottom: 0.9rem; }
+  .brand { font-family: var(--font-display); font-weight: 800; font-size: 1.4rem; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none; }
+  .topbar nav { display: flex; gap: 1.25rem; align-items: center; }
+  .topbar a.link { font-weight: 600; font-size: 0.98rem; text-decoration: none; }
+  .topbar a.pill { background: var(--lime); color: var(--ink); padding: 0.45rem 1rem; border-radius: 999px; font-weight: 700; text-decoration: none; font-size: 0.95rem; }
+
+  /* Botones */
+  .btn { display: inline-block; font-family: var(--font-body); font-weight: 700; font-size: 1.1rem; padding: 1rem 1.7rem; border-radius: 6px; text-decoration: none; border: 3px solid transparent; cursor: pointer; text-align: center; }
+  .btn-lime { background: var(--lime); color: var(--ink); }
+  .btn-lime:hover { background: #33D67C; }
+  .btn-ghost { border-color: var(--on-dark); color: var(--on-dark); background: transparent; }
+  .btn-ghost:hover { background: rgba(255,255,255,0.12); }
+  .btn-dark { background: var(--ink); color: #fff; }
+  .btn-dark:hover { background: #163A22; }
+  .btn-line { background: transparent; border-color: var(--text); color: var(--text); }
+  .btn-line:hover { background: var(--surface); }
+  .actions { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-top: 2rem; }
+
+  /* Hero */
+  .hero { background: var(--hero-bg); color: var(--on-dark); padding: clamp(3rem, 9vw, 6rem) 0 clamp(3.5rem, 9vw, 6.5rem); }
+  .hero h1 { font-size: clamp(3.6rem, 15.5vw, 10rem); line-height: 0.88; }
+  .hero h1 span { display: block; }
+  .hero-sub { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.5rem, 4.4vw, 2.2rem); text-transform: uppercase; color: var(--on-dark-muted); margin-top: 1.5rem; line-height: 1.05; }
+
+  /* Objetivo */
+  .goal { background: var(--lime); color: var(--ink); padding: clamp(3rem, 8vw, 5.5rem) 0; }
+  .goal h2 { font-size: clamp(2.6rem, 9vw, 5.6rem); line-height: 0.92; max-width: 14ch; }
+  .goal-pair { display: grid; gap: 1rem; margin-top: 2.25rem; }
+  .goal-pair div { border-top: 4px solid var(--ink); padding-top: 0.8rem; font-family: var(--font-display); font-weight: 800; text-transform: uppercase; font-size: clamp(1.7rem, 4.5vw, 2.3rem); line-height: 1; }
+  .goal-pair small { display: block; font-family: var(--font-body); font-weight: 500; text-transform: none; font-size: 1.05rem; margin-top: 0.4rem; line-height: 1.35; }
+  @media (min-width: 720px) { .goal-pair { grid-template-columns: 1fr 1fr; gap: 2rem; } }
+
+  section.block { padding: clamp(3.5rem, 8vw, 5.5rem) 0; }
+
+  /* Ayudamos */
+  .tiles { display: grid; gap: 1rem; margin-top: 2.25rem; }
+  @media (min-width: 700px) { .tiles { grid-template-columns: 1fr 1fr; } }
+  .tile { padding: 1.6rem; border-radius: 10px; min-height: 210px; display: flex; flex-direction: column; justify-content: space-between; gap: 1.5rem; }
+  .tile svg { width: 48px; height: 48px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .tile p { margin: 0.5rem 0 0; font-size: 1.1rem; line-height: 1.3; }
+  .t-forest { background: var(--forest); color: #fff; }
+  .t-lime { background: var(--lime); color: var(--ink); }
+  .t-ink { background: var(--ink); color: #fff; }
+  .t-leaf { background: var(--leaf); color: #fff; }
+  :root[data-theme="dark"] .t-ink { background: #050F09; border: 2px solid var(--line); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .t-ink { background: #050F09; border: 2px solid var(--line); } }
+
+  /* Hábitos */
+  .habits-sec { background: var(--surface); }
+  .split { display: grid; gap: 2rem; }
+  @media (min-width: 800px) { .split { grid-template-columns: 5fr 6fr; gap: 3.5rem; align-items: center; } }
+  .lead { font-size: 1.25rem; margin-top: 1.25rem; max-width: 22ch; line-height: 1.3; }
+  .habits-box { background: var(--bg); border: 3px solid var(--text); border-radius: 10px; padding: 1.25rem; }
+  .habit-grid { display: grid; grid-template-columns: minmax(0, 1fr) repeat(7, 2.2rem); gap: 0.45rem; align-items: center; }
+  .habit-days { font-family: var(--font-display); font-weight: 700; text-align: center; color: var(--muted); }
+  .habit-name { font-weight: 600; font-size: 0.95rem; line-height: 1.2; padding-right: 0.4rem; }
+  .habit-dot { width: 2.2rem; height: 2.2rem; border-radius: 50%; padding: 0; cursor: pointer; background: var(--habit-off); border: 2px solid var(--habit-off-border); color: transparent; font-size: 1rem; font-weight: 700; line-height: 1; transition: background 0.15s ease, border-color 0.15s ease; }
+  .habit-dot[aria-pressed="true"] { background: var(--habit-on); border-color: var(--habit-on); color: var(--habit-on-text); }
+  .habit-status { margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--line); }
+  .habit-count { font-family: var(--font-display); font-weight: 800; font-size: 2.2rem; text-transform: uppercase; line-height: 1; }
+  .habit-bar { height: 10px; background: var(--surface); border-radius: 5px; margin: 0.7rem 0; overflow: hidden; }
+  .habit-bar > div { height: 100%; width: 0; background: var(--lime); transition: width 0.25s ease; }
+  .habit-msg { margin: 0; color: var(--muted); font-size: 1rem; }
+  @media (max-width: 420px) {
+    .habit-grid { grid-template-columns: minmax(0, 1fr) repeat(7, 1.85rem); gap: 0.3rem; }
+    .habit-dot { width: 1.85rem; height: 1.85rem; font-size: 0.85rem; }
+  }
+
+  /* Pasos */
+  .steps { list-style: none; margin: 2.25rem 0 0; padding: 0; display: grid; gap: 1.5rem; counter-reset: paso; }
+  .steps li { counter-increment: paso; border-top: 5px solid var(--forest); padding-top: 0.9rem; }
+  .steps li::before { content: counter(paso); font-family: var(--font-display); font-weight: 800; font-size: 3.4rem; line-height: 1; display: block; color: var(--leaf); }
+  .steps h3 { font-size: 1.9rem; margin-top: 0.2rem; }
+  :root[data-theme="dark"] .steps li { border-top-color: var(--lime); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .steps li { border-top-color: var(--lime); } }
+  @media (min-width: 800px) { .steps { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; } }
+
+  /* Testimonios */
+  .proof { background: var(--ink); color: #fff; }
+  .quotes { display: grid; gap: 1rem; margin-top: 2.25rem; }
+  @media (min-width: 800px) { .quotes { grid-template-columns: repeat(3, 1fr); } }
+  .quote { background: rgba(255,255,255,0.07); border-left: 6px solid var(--lime); border-radius: 6px; padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .quote blockquote { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: 1.7rem; line-height: 1.1; }
+  .quote figcaption { font-size: 1rem; color: var(--on-dark-muted); line-height: 1.3; }
+  .quote figcaption strong { display: block; color: #fff; font-size: 1.1rem; }
+  .quotes.quotes-two { grid-template-columns: 1fr; }
+  @media (min-width: 800px) { .quotes.quotes-two { grid-template-columns: 1fr 1fr; } }
+  .quotes-two .quote:first-child { grid-column: 1 / -1; }
+  .quotes-two .quote { padding: 1.75rem; gap: 1.25rem; }
+  .quotes-two .quote blockquote { font-size: clamp(1.5rem, 4vw, 1.9rem); line-height: 1.12; }
+  .quotes-two .quote blockquote.second { font-size: clamp(1.15rem, 3vw, 1.35rem); font-weight: 600; color: var(--on-dark-muted); line-height: 1.25; }
+  .quote .tag { font-size: 0.8rem; color: var(--lime); margin-top: 0.4rem; display: block; }
+  figure.quote { margin: 0; }
+
+  /* Formulario */
+  .apply { background: var(--lime); color: var(--ink); }
+  .apply h2 { max-width: 12ch; }
+  .apply-sub { font-size: 1.25rem; font-weight: 500; margin-top: 1rem; }
+  .card { background: var(--bg); color: var(--text); border: 3px solid var(--ink); border-radius: 12px; padding: 1.5rem; margin-top: 2rem; max-width: 720px; }
+  .prog-top { display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 0.95rem; color: var(--muted); }
+  .prog { height: 10px; background: var(--surface); border-radius: 5px; margin: 0.6rem 0 1.5rem; overflow: hidden; }
+  .prog > div { height: 100%; background: var(--forest); width: 0; transition: width 0.25s ease; }
+  :root[data-theme="dark"] .prog > div { background: var(--lime); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .prog > div { background: var(--lime); } }
+  .q { font-family: var(--font-display); font-weight: 800; text-transform: uppercase; font-size: clamp(2rem, 6vw, 2.9rem); line-height: 1; margin: 0 0 1.25rem; }
+  .q:focus { outline: none; }
+  .chips { display: grid; gap: 0.7rem; }
+  @media (min-width: 600px) { .chips { grid-template-columns: 1fr 1fr; } }
+  .chip { font-family: var(--font-body); font-weight: 600; font-size: 1.1rem; min-height: 3.6rem; padding: 0.8rem 1rem; border-radius: 8px; border: 2px solid var(--text); background: var(--bg); color: var(--text); cursor: pointer; text-align: left; }
+  .chip:hover { background: var(--forest); color: #fff; border-color: var(--forest); }
+  .field { width: 100%; font-family: var(--font-body); font-size: 1.15rem; padding: 0.95rem 1rem; border-radius: 8px; border: 2px solid var(--text); background: var(--bg); color: var(--text); }
+  .row { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 1.1rem; align-items: center; }
+  .back { background: none; border: none; color: var(--muted); font-family: var(--font-body); font-size: 1rem; font-weight: 600; cursor: pointer; padding: 0.4rem 0; text-decoration: underline; }
+  .result p { font-size: 1.15rem; max-width: 46ch; }
+  .summary { width: 100%; font-family: var(--font-body); font-size: 1rem; line-height: 1.45; padding: 0.9rem 1rem; border-radius: 8px; border: 2px solid var(--line); background: var(--surface); color: var(--text); resize: vertical; min-height: 11rem; }
+  .status { min-height: 1.4rem; margin: 0.6rem 0 0; font-weight: 600; color: var(--leaf); }
+  .card .btn-dark { background: var(--forest); }
+  .card .btn-dark:hover { filter: brightness(1.12); }
+  :root[data-theme="dark"] .card .btn-dark { background: var(--lime); color: var(--ink); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .card .btn-dark { background: var(--lime); color: var(--ink); } }
+
+  footer { background: var(--ink); color: var(--on-dark-muted); padding: 1.5rem 0 2.5rem; font-size: 0.95rem; }
+  footer .wrap { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; justify-content: space-between; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .habit-dot, .habit-bar > div, .prog > div { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#inicio">Entrena Your Life</a>
+    <nav>
+      <a class="link" href="https://www.instagram.com/entrenayourlife/" target="_blank" rel="noopener">Instagram</a>
+      <a class="pill" href="#empezar">Empezar</a>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+
+  <div class="hero">
+    <div class="wrap">
+      <h1><span>No solo entrenas el cuerpo.</span><span>Entrenas tu vida.</span></h1>
+      <p class="hero-sub">Entrenamiento y hábitos. Plan claro, seguimiento real.</p>
+      <div class="actions">
+        <a class="btn btn-lime" href="#empezar">Quiero empezar</a>
+        <a class="btn btn-ghost" href="https://www.instagram.com/entrenayourlife/" target="_blank" rel="noopener">Ver Instagram</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="goal">
+    <div class="wrap">
+      <h2>Que entrenar sea parte de tu vida.</h2>
+      <div class="goal-pair">
+        <div>Entrenamientos<small>Rutinas y clases que puedes seguir.</small></div>
+        <div>Hábitos<small>Lo que haces fuera del gimnasio.</small></div>
+      </div>
+    </div>
+  </div>
+
+  <section class="block" id="ayudamos">
+    <div class="wrap">
+      <h2>En qué te ayudamos</h2>
+      <div class="tiles">
+        <div class="tile t-forest">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9z"/><path d="M9 12h6M9 16h6"/></svg>
+          <div><h3>Evaluación</h3><p>Sabemos desde dónde partes.</p></div>
+        </div>
+        <div class="tile t-lime">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6M6 7v10M18 7v10M21 9v6M6 12h12"/></svg>
+          <div><h3>Entrenamiento</h3><p>Un plan claro, semana a semana.</p></div>
+        </div>
+        <div class="tile t-ink">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7c-2-2-6-1-6 4 0 4 2 9 4 9 1 0 1.5-.5 2-.5s1 .5 2 .5c2 0 4-5 4-9 0-5-4-6-6-4z"/><path d="M12 7c0-2 1-3 3-4"/></svg>
+          <div><h3>Alimentación</h3><p>Pautas que puedes mantener.</p></div>
+        </div>
+        <div class="tile t-leaf">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l5-5 4 3 7-8"/><path d="M3 21h18"/></svg>
+          <div><h3>Seguimiento</h3><p>Medimos y ajustamos cada semana.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block habits-sec" id="habitos">
+    <div class="wrap split">
+      <div>
+        <h2>Los hábitos hacen el resultado.</h2>
+        <p class="lead">Toca y marca tu semana.</p>
+      </div>
+      <div class="habits-box" aria-label="Ejemplo de seguimiento semanal de hábitos">
+        <div class="habit-grid" id="habit-grid" role="group"></div>
+        <div class="habit-status">
+          <div class="habit-count" id="habit-count" aria-live="polite">0 de 28</div>
+          <div class="habit-bar" aria-hidden="true"><div id="habit-bar"></div></div>
+          <p class="habit-msg" id="habit-msg">Marca lo que has hecho hoy.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="metodo">
+    <div class="wrap">
+      <h2>Así empezamos</h2>
+      <ol class="steps">
+        <li><h3>Rellenas el formulario</h3></li>
+        <li><h3>Te respondemos</h3></li>
+        <li><h3>Diseñamos tu plan</h3></li>
+        <li><h3>Seguimos cada semana</h3></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block proof" id="testimonios">
+    <div class="wrap">
+      <h2>Lo que dicen</h2>
+      <div class="quotes quotes-two">
+        <figure class="quote">
+          <blockquote>Siempre está encima de mí, no para exigirme sin más, sino para conseguir que saque mi mejor versión en cada entrenamiento.</blockquote>
+          <blockquote class="second">Después de estos años, no solo noto cambios físicos, sino también más fuerza, más confianza y más ganas de seguir mejorando.</blockquote>
+          <figcaption><strong>Cristina</strong>Clienta de Entrena Your Life</figcaption>
+        </figure>
+        <figure class="quote">
+          <blockquote>Sin él y mi constancia no haría las cosas que hago.</blockquote>
+          <figcaption><strong>Ángela</strong>Clienta de Entrena Your Life</figcaption>
+        </figure>
+        <figure class="quote">
+          <blockquote>Mi experiencia ha sido muy positiva y gracias a Your Life estoy consiguiendo mi objetivo con muy buenos resultados.</blockquote>
+          <figcaption><strong>Pedro Pablo</strong>Cliente de Entrena Your Life</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="block apply" id="empezar">
+    <div class="wrap">
+      <h2>Empieza aquí</h2>
+      <p class="apply-sub">7 preguntas rápidas. Menos de 2 minutos.</p>
+      <div class="card" id="card"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Entrena Your Life</span>
+    <span>Entrenamiento y hábitos</span>
+  </div>
+</footer>
+
+<script>
+/* ---------- Seguimiento de hábitos (demo) ---------- */
+(function () {
+  var days = ["L", "M", "X", "J", "V", "S", "D"];
+  var habits = ["Entrenar", "Moverme más", "Comer con intención", "Dormir y descansar"];
+  var state = habits.map(function () { return days.map(function () { return false; }); });
+  var grid = document.getElementById("habit-grid");
+  var countEl = document.getElementById("habit-count");
+  var barEl = document.getElementById("habit-bar");
+  var msgEl = document.getElementById("habit-msg");
+  var total = habits.length * days.length;
+
+  function messageFor(n) {
+    if (n === 0) return "Marca lo que has hecho hoy.";
+    if (n < 8) return "Buen comienzo. La constancia se construye día a día.";
+    if (n < 16) return "Ya tienes ritmo. Sigue repitiendo lo básico.";
+    if (n < 24) return "Semana sólida. Así llegan los resultados.";
+    return "Semana redonda. Ahora toca mantenerla.";
+  }
+  function update() {
+    var n = 0;
+    state.forEach(function (row) { row.forEach(function (v) { if (v) n++; }); });
+    countEl.textContent = n + " de " + total;
+    barEl.style.width = Math.round((n / total) * 100) + "%";
+    msgEl.textContent = messageFor(n);
+  }
+  function build() {
+    grid.appendChild(document.createElement("div"));
+    days.forEach(function (d) {
+      var el = document.createElement("div");
+      el.className = "habit-days"; el.textContent = d; grid.appendChild(el);
+    });
+    habits.forEach(function (h, hi) {
+      var name = document.createElement("div");
+      name.className = "habit-name"; name.textContent = h; grid.appendChild(name);
+      days.forEach(function (d, di) {
+        var b = document.createElement("button");
+        b.type = "button"; b.className = "habit-dot";
+        b.setAttribute("aria-pressed", "false");
+        b.setAttribute("aria-label", h + ", día " + d);
+        b.textContent = "\u2713";
+        b.addEventListener("click", function () {
+          state[hi][di] = !state[hi][di];
+          b.setAttribute("aria-pressed", state[hi][di] ? "true" : "false");
+          update();
+        });
+        grid.appendChild(b);
+      });
+    });
+    update();
+  }
+  build();
+})();
+
+/* ---------- Formulario de selección ---------- */
+(function () {
+  var IG_PROFILE = "https://www.instagram.com/entrenayourlife/";
+  var IG_DM = "https://ig.me/m/entrenayourlife";
+
+  var steps = [
+    { key: "nombre", label: "Nombre", q: "¿Cómo te llamas?", type: "text", ph: "Tu nombre", required: true },
+    { key: "objetivo", label: "Objetivo", q: "¿Cuál es tu objetivo principal?", options: ["Perder grasa", "Ganar músculo", "Ponerme en forma", "Crear el hábito de entrenar"] },
+    { key: "experiencia", label: "Experiencia", q: "¿Cuál es tu experiencia?", options: ["Empiezo desde cero", "Entreno a veces", "Entreno con regularidad"] },
+    { key: "dias", label: "Días por semana", q: "¿Cuántos días por semana puedes entrenar?", options: ["1 o 2", "3", "4 o más"] },
+    { key: "inicio", label: "Cuándo empezar", q: "¿Cuándo quieres empezar?", options: ["Ya mismo", "Este mes", "Solo estoy mirando"] },
+    { key: "seguimiento", label: "Check-in semanal", q: "¿Harás un check-in cada semana?", options: ["Sí", "Prefiero no tener seguimiento"] },
+    { key: "limitaciones", label: "Lesiones o limitaciones", q: "¿Tienes alguna lesión o limitación?", type: "text", ph: "Escribe «Ninguna» si no tienes", required: false }
+  ];
+
+  var card = document.getElementById("card");
+  var answers = {};
+  var current = 0;
+  var started = false;
+
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text !== undefined) e.textContent = text;
+    return e;
+  }
+
+  function progress(n) {
+    var top = el("div", "prog-top");
+    top.appendChild(el("span", "", "Pregunta " + (n + 1) + " de " + steps.length));
+    card.appendChild(top);
+    var bar = el("div", "prog");
+    var fill = document.createElement("div");
+    fill.style.width = Math.round((n / steps.length) * 100) + "%";
+    bar.appendChild(fill);
+    card.appendChild(bar);
+  }
+
+  function goBack() {
+    if (current > 0) { current--; started = true; renderStep(); }
+  }
+
+  function backBtn() {
+    var b = el("button", "back", "Atrás");
+    b.type = "button";
+    b.addEventListener("click", goBack);
+    return b;
+  }
+
+  function next() {
+    started = true;
+    current++;
+    if (current >= steps.length) renderResult(); else renderStep();
+  }
+
+  function renderStep() {
+    var s = steps[current];
+    card.textContent = "";
+    progress(current);
+    var q = el("h3", "q", s.q);
+    q.tabIndex = -1;
+    card.appendChild(q);
+
+    if (s.options) {
+      var chips = el("div", "chips");
+      s.options.forEach(function (opt) {
+        var b = el("button", "chip", opt);
+        b.type = "button";
+        b.addEventListener("click", function () { answers[s.key] = opt; next(); });
+        chips.appendChild(b);
+      });
+      card.appendChild(chips);
+      if (current > 0) { var r = el("div", "row"); r.appendChild(backBtn()); card.appendChild(r); }
+      if (started) q.focus({ preventScroll: true });
+    } else {
+      var input = el("input", "field");
+      input.type = "text";
+      input.placeholder = s.ph || "";
+      input.maxLength = 200;
+      input.value = answers[s.key] || "";
+      input.setAttribute("aria-label", s.q);
+      card.appendChild(input);
+      var row = el("div", "row");
+      var isLast = current === steps.length - 1;
+      var go = el("button", "btn btn-dark", isLast ? "Ver resultado" : "Siguiente");
+      go.type = "button";
+      function submit() {
+        var v = input.value.trim();
+        if (s.required && !v) { input.focus(); input.style.borderColor = "#C62828"; return; }
+        answers[s.key] = v || "Ninguna";
+        next();
+      }
+      go.addEventListener("click", submit);
+      input.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); submit(); } });
+      row.appendChild(go);
+      if (current > 0) row.appendChild(backBtn());
+      card.appendChild(row);
+      if (started) input.focus({ preventScroll: true });
+    }
+  }
+
+  function buildSummary() {
+    var lines = [
+      "Hola, soy " + answers.nombre + ". Quiero empezar con Entrena Your Life.",
+      "",
+      "Objetivo: " + answers.objetivo,
+      "Experiencia: " + answers.experiencia,
+      "Días por semana: " + answers.dias,
+      "Cuándo empezar: " + answers.inicio,
+      "Check-in semanal: " + answers.seguimiento,
+      "Lesiones o limitaciones: " + answers.limitaciones
+    ];
+    return lines.join("\n");
+  }
+
+  function copyText(text, ta) {
+    function fallback() {
+      ta.focus(); ta.select();
+      try { return document.execCommand("copy"); } catch (e) { return false; }
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(text).then(function () { return true; }, function () { return fallback(); });
+    }
+    return Promise.resolve(fallback());
+  }
+
+  function restart() {
+    answers = {}; current = 0; renderStep();
+  }
+
+  function renderResult() {
+    card.textContent = "";
+    var bar = el("div", "prog");
+    var fill = document.createElement("div");
+    fill.style.width = "100%";
+    bar.appendChild(fill);
+    card.appendChild(bar);
+
+    var wrap = el("div", "result");
+    var title, msg;
+    var fits = true;
+    if (answers.seguimiento !== "Sí") {
+      fits = false;
+      title = "El seguimiento es la clave";
+      msg = "Trabajamos con un check-in semanal porque es lo que da resultados. Si cambias de idea, vuelve a empezar.";
+    } else if (answers.inicio === "Solo estoy mirando") {
+      fits = false;
+      title = "Aún no es tu momento";
+      msg = "Sigue nuestro contenido en Instagram y vuelve cuando quieras empezar.";
+    } else {
+      title = "Encajas. Vamos a por ello.";
+      msg = "Envíanos tus respuestas por Instagram y te contestamos.";
+    }
+    var h = el("h3", "q", title);
+    h.tabIndex = -1;
+    wrap.appendChild(h);
+    wrap.appendChild(el("p", "", msg));
+
+    if (fits) {
+      var summary = buildSummary();
+      var ta = el("textarea", "summary");
+      ta.readOnly = true;
+      ta.value = summary;
+      ta.setAttribute("aria-label", "Tus respuestas");
+      wrap.appendChild(ta);
+      var status = el("p", "status", "");
+      status.setAttribute("aria-live", "polite");
+      var row = el("div", "row");
+      var copy = el("button", "btn btn-dark", "1. Copiar respuestas");
+      copy.type = "button";
+      copy.addEventListener("click", function () {
+        copyText(summary, ta).then(function (ok) {
+          status.textContent = ok ? "Copiado. Ahora pégalo en el mensaje." : "Selecciona el texto y cópialo a mano.";
+        });
+      });
+      var open = el("a", "btn btn-lime", "2. Abrir Instagram");
+      open.href = IG_DM; open.target = "_blank"; open.rel = "noopener";
+      open.style.background = "var(--lime)"; open.style.color = "#0A1F10";
+      row.appendChild(copy); row.appendChild(open);
+      wrap.appendChild(row);
+      wrap.appendChild(status);
+    } else {
+      var row2 = el("div", "row");
+      var ig = el("a", "btn btn-lime", "Ver Instagram");
+      ig.href = IG_PROFILE; ig.target = "_blank"; ig.rel = "noopener";
+      ig.style.background = "var(--lime)"; ig.style.color = "#0A1F10";
+      var again = el("button", "btn btn-line", "Volver a empezar");
+      again.type = "button";
+      again.addEventListener("click", restart);
+      row2.appendChild(ig); row2.appendChild(again);
+      wrap.appendChild(row2);
+    }
+    if (fits) {
+      var r3 = el("div", "row");
+      var again2 = el("button", "back", "Empezar de nuevo");
+      again2.type = "button";
+      again2.addEventListener("click", restart);
+      r3.appendChild(again2);
+      wrap.appendChild(r3);
+    }
+    card.appendChild(wrap);
+    h.focus({ preventScroll: true });
+  }
+
+  renderStep();
+})();
+</script>
+</body>
+</html>
